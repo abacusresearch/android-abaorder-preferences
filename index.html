@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+
+    <!-- Include jQuery. -->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!-- Include jQuery UI. -->
+
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Include Bootstrap. -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+      $(function() {
+        $('select').selectmenu();
+
+        var preferences = $('#preferences');
+
+        preferences.submit(function(event) {
+          window.location = $('#scheme').val() + '://preferences?' + preferences.serialize();
+          return false;
+        });
+      });
+    </script>
+
+    <style>
+      body {padding-top: 70px}
+      input {width: 100%}
+      .row {padding-top: 10px}
+      .ui-selectmenu-button.ui-button {width: 100%}
+    </style>
+    <title>AbaOrder Preferences</title>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand">AbaOrder Preferences</span>
+        </div>
+      </div>
+    </div>
+
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <b>AbaOrder Build Type</b>
+          </div>
+          <div class="col-md-6">
+            <select id="scheme">
+              <option value="ch.abaorder.dev" selected>Debug</option>
+              <option value="ch.abaorder.alpha">Alpha</option>
+              <option value="ch.abaorder.beta">Beta</option>
+              <option value="ch.abaorder">Release</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form id="preferences">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <b>AbaSky Environment</b>
+          </div>
+          <div class="col-md-6">
+            <select id="abaSkyEnvironment" name="abaSkyEnvironment">
+              <option value="DEV">Development</option>
+              <option value="INT">Integration</option>
+              <option value="MOCK">Mock</option>
+              <option value="PROD" selected>Production</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <b>Cloud Logging</b>
+          </div>
+          <div class="col-md-6">
+            <select id="cloudLogging" name="cloudLogging">
+              <option value="false">Disabled</option>
+              <option value="true">Enabled</option>
+            </select>
+            <small>
+              If enabled, logs created by the application are sent to a cloud
+              service, where Abacus can inspect them in real time.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="submit" value="Apply">
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
